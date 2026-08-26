@@ -1,0 +1,18 @@
+# Secrets -- never commit real keys
+.env
+
+# Databases created at runtime
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/

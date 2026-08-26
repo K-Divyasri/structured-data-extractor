@@ -1,0 +1,13 @@
+DANIEL OWUSU
+Research Scientist
+daniel.owusu@example.com  //  +1 202 555 0147  //  Boston, MA
+
+PROFILE
+Research scientist, 12 years of experience in computer vision and applied ML.
+
+SKILLS
+Python ,  C++ , TensorFlow ,PyTorch, CUDA , OpenCV,  Linear Algebra
+
+EDUCATION
+PhD in Electrical Engineering, MIT, 2013
+BSc in Physics, University of Ghana, 2008

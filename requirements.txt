@@ -1,0 +1,8 @@
+# Runtime dependencies for the Structured Data Extractor.
+pydantic>=2.7
+fastapi>=0.110
+uvicorn[standard]>=0.29
+# Only needed when you run with --real (a live LLM call). Offline mode needs none
+# of it, but it's harmless to install.
+litellm>=1.40
+python-dotenv>=1.0

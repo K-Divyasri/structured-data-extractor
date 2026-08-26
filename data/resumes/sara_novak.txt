@@ -1,0 +1,6 @@
+Sara Novak
+sara.novak@example.com
+
+Frontend developer. 3 years experience.
+
+React, TypeScript

@@ -1,0 +1,18 @@
+Priya Sharma
+Senior Data Engineer
+Email: priya.sharma@example.com
+Phone: +44 7911 123456
+Location: London, UK
+
+Summary
+Data engineer with 7 years of experience building batch and streaming
+pipelines. Comfortable owning a platform end to end.
+
+Skills: Python, SQL, Apache Spark, Airflow, dbt, AWS, Docker, Kafka
+
+Experience
+Senior Data Engineer, Finch Analytics (2021 - present)
+Data Engineer, Meridian Bank (2017 - 2021)
+
+Education
+BSc Computer Science, University of Manchester, 2017

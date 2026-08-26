@@ -1,0 +1,5 @@
+# Everything in the app, plus the tools you develop and test with.
+-r requirements.txt
+pytest>=8.0
+httpx>=0.27   # FastAPI's TestClient uses httpx under the hood
+ruff>=0.4     # linter / formatter

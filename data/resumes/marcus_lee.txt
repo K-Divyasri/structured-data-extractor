@@ -1,0 +1,19 @@
+MARCUS LEE  |  marcus.lee23@example.com  |  (415) 555-0198  |  San Francisco, CA
+
+Backend Software Engineer
+
+5 yrs building APIs and services at scale.
+
+Core skills
+- Go
+- Python
+- PostgreSQL
+- gRPC
+- Kubernetes
+- Redis
+
+Work history
+Software Engineer II @ Northwind (2020-2024)
+Junior Software Engineer @ Dropbox (2019-2020)
+
+Bachelor of Science in Software Engineering - San Jose State University

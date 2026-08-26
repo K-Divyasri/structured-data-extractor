@@ -1,0 +1,13 @@
+Aisha Khan
+aisha.khan@example.co.in
++91 98765 43210
+Bangalore
+
+I am a machine learning engineer who has shipped recommendation systems and
+NLP features. Day to day I work in Python and PyTorch, deploy models with
+FastAPI and Docker, and track experiments with MLflow. I also know my way
+around scikit-learn and pandas.
+
+Previously at Flipkart and a healthtech startup.
+
+Education: M.Tech in Computer Science, IIT Bombay

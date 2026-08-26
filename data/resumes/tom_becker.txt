@@ -1,0 +1,15 @@
+Tom Becker
+Emial: tom.becker@example.de
+Tel: 030 1234567
+Berlin, Germany
+
+DevOps Engineer with over 9 years of experience.
+
+Technologies I use: Terraform, Ansible, AWS, GCP, Jenkins, Prometheus,
+Grafana, Bash, Python
+
+Roles
+- Lead DevOps Engineer, Zalando (2019-present)
+- Systems Administrator, SAP (2015-2019)
+
+B.Eng. Electrical Engineering, TU Munich
