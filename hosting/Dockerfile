@@ -1,11 +1,10 @@
 # Dockerfile for the Structured Data Extractor FastAPI service.
 #
-# IMPORTANT: build this with the build context set to `build_from_scratch/`,
-# NOT the project root. That folder is the repo you push to GitHub and the one
+# IMPORTANT: build this with the build context set to the repo root, NOT
+# `hosting/`. The repo root is the folder you push to GitHub and the one
 # that holds `extractor/`, `requirements.txt`, `web_app.py`, etc.
 #
-#   cd build_from_scratch
-#   docker build -f ../hosting/Dockerfile -t extractor .
+#   docker build -f hosting/Dockerfile -t extractor .
 #   docker run -p 8000:8000 extractor
 #
 # Then open http://127.0.0.1:8000/docs

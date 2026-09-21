@@ -14,10 +14,10 @@ host for one or both. Everything here runs **offline by default** — the determ
 extractor needs no API key — so a public deploy costs nothing. The optional `--real` /
 `{"real": true}` path uses an LLM, and only then do you need a key.
 
-A note on layout before you start: this repo publishes the **whole project folder**
-(`05-structured-data-extractor/`), with `build_from_scratch/` as a subfolder. That way your
-GitHub page shows the learning material *and* the polished package. The commands below run
-from the **project root** unless they say otherwise.
+A note on layout before you start: the repo root is the polished package itself:
+`extractor/`, `tests/`, `web_app.py`, and `requirements.txt` sit directly next to this
+`hosting/` folder. The commands below run from the **project root** unless they say
+otherwise.
 
 ---
 
@@ -65,7 +65,7 @@ Two files must never leave your laptop, and the shipped `.gitignore` already blo
 - **`*.db`** — the SQLite files the tool creates at runtime (`resumes.db`). That's output,
   not source. It's regenerated whenever the tool runs. No reason to publish it.
 
-Open `build_from_scratch/.gitignore` and confirm it lists at least `.env`, `*.db`,
+Open `.gitignore` and confirm it lists at least `.env`, `*.db`,
 `__pycache__/`, and `.venv/`. It does — but check, because this is the part that bites
 people. The rule: **source, config, docs, and sample data go in; secrets, databases, and
 machine junk stay out.**
@@ -74,8 +74,8 @@ machine junk stay out.**
 
 ## Step 2 — Make the local repo and commit
 
-From the **project root** (`05-structured-data-extractor/`, the folder with
-`build_from_scratch/` and `generate_data.py` in it):
+From the **project root** (the folder with
+`extractor/` and `generate_data.py` in it):
 
 ```powershell
 git init
@@ -143,12 +143,12 @@ git push
 ```
 
 Open the repo's **Actions** tab and watch it run: checkout, install Python 3.12, install
-`build_from_scratch/requirements-dev.txt`, run `pytest` from `build_from_scratch/`. Green
+`requirements-dev.txt`, run `pytest` from the repo root. Green
 means all 27 tests passed on GitHub's machine. If it's red, click the failed step and read
 the log bottom-up — the real error is in the last few lines.
 
 Once green, grab a status badge (Actions page → `...` → **Create status badge**) and paste
-the markdown at the top of `build_from_scratch/README.md`.
+the markdown at the top of `README.md`.
 
 ---
 
@@ -161,21 +161,21 @@ needs no key and costs nothing. Two good free hosts — pick one.
 
 1. Go to https://share.streamlit.io and sign in with GitHub.
 2. **New app** → pick your `structured-data-extractor` repo and the `main` branch.
-3. **Main file path:** `build_from_scratch/web_app.py`.
+3. **Main file path:** `web_app.py`.
 4. Advanced settings → set the Python version to 3.12 if offered. Streamlit reads
-   dependencies from `build_from_scratch/requirements.txt` automatically.
+   dependencies from `requirements.txt` automatically.
 5. **Deploy.** First build takes a couple of minutes. You get a
    `https://YOURNAME-....streamlit.app` URL.
 
-If Streamlit can't find the package, it's almost always the main-file path — it must point
-inside `build_from_scratch/` so `from extractor... import` resolves.
+If Streamlit can't find the package, it's almost always the main-file path - it must be
+`web_app.py` at the repo root so `from extractor... import` resolves.
 
 ### A2. Hugging Face Spaces (Streamlit SDK)
 
 1. Go to https://huggingface.co/spaces → **Create new Space**.
 2. Name it, choose **Streamlit** as the SDK, keep it **Public**, pick the free CPU tier.
 3. Easiest path: in the Space's **Files** tab, upload `web_app.py`, the `extractor/` folder,
-   `requirements.txt`, and the `data/` folder from `build_from_scratch/`. Spaces expects the
+   `requirements.txt`, and the `data/` folder from the repo root. Spaces expects the
    app entry file at the Space root, so `web_app.py` and `extractor/` sit at the top level.
 4. Spaces installs `requirements.txt` and launches Streamlit automatically. The build log is
    on the Space page; when it finishes you have a public URL.
@@ -188,7 +188,7 @@ Either way, the demo defaults to offline mode — no secret needed. Done: you ha
 
 The API is the deliverable that shows real backend skills. All three hosts below run the
 same Docker image. The image is defined in `hosting/Dockerfile`, and its **build context is
-`build_from_scratch/`** (that's where `extractor/` and `requirements.txt` live). The start
+the repo root** (that's where `extractor/` and `requirements.txt` live). The start
 command every host runs is:
 
 ```
@@ -203,8 +203,7 @@ inside the box and the host's health check would fail.
 ### Build and test the image locally first
 
 ```powershell
-cd build_from_scratch
-docker build -f ..\hosting\Dockerfile -t extractor .
+docker build -f hosting\Dockerfile -t extractor .
 docker run -p 8000:8000 extractor
 ```
 
@@ -214,9 +213,9 @@ Open http://127.0.0.1:8000/docs. If that works locally, it'll work on the host.
 
 1. Push your repo to GitHub (Steps 2–3) if you haven't.
 2. https://render.com → sign in with GitHub → **New** → **Web Service** → pick the repo.
-3. Render detects the Dockerfile. Set **Root Directory** to `build_from_scratch` and
-   **Dockerfile Path** to `../hosting/Dockerfile` (so the build context is
-   `build_from_scratch/`, matching the local build above).
+3. Render detects the Dockerfile. Leave **Root Directory** blank (the repo root) and set
+   **Dockerfile Path** to `hosting/Dockerfile` (so the build context is
+   the repo root, matching the local build above).
 4. Instance type: **Free**. Render sets `$PORT` for you — leave the start command as the
    Dockerfile's `CMD`.
 5. **Create Web Service.** First build takes a few minutes; you get a
@@ -228,7 +227,7 @@ Free Render services spin down after ~15 minutes idle and cold-start on the next
 ### B2. Hugging Face Spaces (Docker SDK)
 
 1. **Create new Space** → SDK **Docker** → free CPU tier → Public.
-2. Put the `build_from_scratch/` contents at the Space root (so `extractor/`,
+2. Put the repo's files at the Space root (so `extractor/`,
    `requirements.txt`, `web_app.py`, `data/` are top-level) and add the `Dockerfile` from
    `hosting/` at the root too.
 3. Spaces expects the container to listen on **port 7860**. Either set an env var `PORT=7860`
@@ -239,14 +238,14 @@ Free Render services spin down after ~15 minutes idle and cold-start on the next
 ### B3. Google Cloud Run (free tier)
 
 1. Install the gcloud CLI and run `gcloud init` (sign in, pick/create a project).
-2. From `build_from_scratch/`, one command builds and deploys:
+2. From the repo root, one command builds and deploys:
 
 ```powershell
 gcloud run deploy extractor --source . --region us-central1 --allow-unauthenticated
 ```
 
    (`--source .` uses Cloud Build; it'll pick up a Dockerfile if present, so copy
-   `hosting/Dockerfile` into `build_from_scratch/` first, or point Cloud Build at it.)
+   `hosting/Dockerfile` into the repo root first, or point Cloud Build at it.)
 3. Cloud Run sets `$PORT` (usually 8080) and the container reads it. It prints an
    `https://extractor-....run.app` URL. Cloud Run's free tier covers a portfolio's traffic.
 
